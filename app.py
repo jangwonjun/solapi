@@ -2,7 +2,7 @@ import json
 from src.lib import message, storage
 import pandas
 from env import SEND
-
+from tqdm import tqdm
 
 def clean_number():
        with open('list.csv',encoding='utf-8') as f:
@@ -35,18 +35,19 @@ if __name__ == '__main__':
     print(json.dumps(json.loads(res.text), indent=2, ensure_ascii=False))
     
     
-    for i in send:
+    for i in range((len(send))):
         data = {
             'messages': [
                 {
-                    'to': SEND.SENDNUMBER,
-                    'from': send[i],
+                    'to': send[i],
+                    'from': SEND.SENDNUMBER,
                     'subject': '즐거운 한가위',
-                    'imageId': 'ST01FZ230928171622432JLikMe7nVG1',
-                    'text': '안녕하세요 :) 어느새 신선한 바람이 부는 추석입니다. 맑은 하늘을 마주하고 더없이 좋은 날씨를 함께하는것에 감사한 하루입니다. 올해도 대박 나시고 하시는 일마다 모두 이루시기를 기도합니다. 즐겁고 다복한 한가위 되세요! 장원준 올림'
+                    'imageId': 'ST01FZ230928234046348JkjlWTXZx7V',
+                    'text': '안녕하세요 :) 어느새 신선한 바람이 부는 추석입니다. 맑은 하늘을 마주하고 더없이 좋은 날씨를 함께하는 것에 감사한 하루입니다. 올해도 대박 나시고 하시는 일마다 모두 이루시기를 기도합니다. 즐겁고 다복한 한가위 되세요! 장원준 올림'
                 }
             ]
         }
         res = message.send_many(data)
+        print(f"{send[i]}에게 성공적으로 전송했습니다")
         print(json.dumps(json.loads(res.text), indent=2, ensure_ascii=False))
     
