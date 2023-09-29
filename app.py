@@ -50,4 +50,6 @@ if __name__ == '__main__':
         res = message.send_many(data)
         print(f"{send[i]}에게 성공적으로 전송했습니다")
         print(json.dumps(json.loads(res.text), indent=2, ensure_ascii=False))
+        
+        
     
