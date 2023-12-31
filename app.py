@@ -1,8 +1,6 @@
 import json
 from src.lib import message, storage
-import pandas
 from env import SEND
-from tqdm import tqdm
 
 def clean_number():
        with open('list.csv',encoding='utf-8') as f:
@@ -26,31 +24,36 @@ def clean_number():
    
         return real_result
              
+def set_sms_message():
+    print("전송할 메세지를 입력합니다. SMS 타입에 한글 45자, 영자 90자 이상 입력되면 오류가 발생합니다.")
+    
+         
+
 if __name__ == '__main__':
-    #print(clean_number())
-    #final_send_target = clean_number()
     send = clean_number()
     print(send)
-    res = storage.upload_image('images.jpeg')
+    res = storage.upload_image('image.jpg')
     print(json.dumps(json.loads(res.text), indent=2, ensure_ascii=False))
     
     
     for i in range((len(send))):
+        
         data = {
             'messages': [
                 {
-                    'to': send[i],
+                    'to': data[i],
                     'from': SEND.SENDNUMBER,
-                    'subject': '즐거운 한가위',
-                    'imageId': 'ST01FZ230928234046348JkjlWTXZx7V',
-                    'text': '안녕하세요 :) 어느새 신선한 바람이 부는 추석입니다. 맑은 하늘을 마주하고 더없이 좋은 날씨를 함께하는 것에 감사한 하루입니다. 올해도 대박 나시고 하시는 일마다 모두 이루시기를 기도합니다. 즐겁고 다복한 한가위 되세요! 장원준 올림'
+                    'subject': '즐거운 새해',
+                    'imageId': 'ST01FZ231231012815743E3YyJdSE3j5',
+                    'text': '안녕하세요 :) \n다사다난했던 2023년이 마무리 되어 갑니다. 새해에는 소망하시는 일들 모두 이루어지시고 \n늘 행복한 일만 가득한 해가 되시길 기원합니다. 새해복 많이 받으세요!\n장원준 올림'
                 }
             ]
         }
+        
         res = message.send_many(data)
-        print(f"{send[i]}에게 성공적으로 전송했습니다")
+        #print(f"{send[i]}에게 성공적으로 전송했습니다")
         print(json.dumps(json.loads(res.text), indent=2, ensure_ascii=False))
         
-        
+    
         
     
