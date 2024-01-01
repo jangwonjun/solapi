@@ -8,7 +8,7 @@
   data = {
             'messages': [
                 {
-                    'to': data[i],
+                    'to': send[i],
                     'from': SEND.SENDNUMBER,
                     'subject': '즐거운 새해',
                     'imageId': '이미지ID를 입력하세요. 단, 이미지는 res로 따로 업로드 해야합니다.',
